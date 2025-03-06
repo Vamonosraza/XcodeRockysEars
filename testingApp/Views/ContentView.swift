@@ -47,9 +47,13 @@ struct ContentView: View {
 
 extension Color {
     init(hex: String){
-        let scanner = Scanner(string: hex)
-        scanner.scanLocation = 0
+        var hexString = hex
+        if hexString.hasPrefix("#") {
+            hexString.removeFirst()
+        }
+        let scanner = Scanner(string: hexString)
         var rgbValue: UInt64 = 0
+        scanner.currentIndex = hexString.startIndex
         scanner.scanHexInt64(&rgbValue)
         let red = Double((rgbValue & 0xff0000) >> 16) / 255.0
         let green = Double((rgbValue & 0x00ff00) >> 8) / 255.0

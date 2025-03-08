@@ -1,10 +1,13 @@
 import SwiftUI
 
 struct MainPageView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         Text("Main Page")
             .font(.largeTitle)
-            .foregroundColor(Color(hex: "4477CE"))
+            .foregroundColor(colorScheme.primary)
+            .applyCustomNavigation(colorScheme: .dark)
     }
 }
 

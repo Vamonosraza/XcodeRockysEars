@@ -8,6 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
+    @Environment(\.colorScheme) var colorScheme
+    
     var body: some View {
         NavigationView{
             VStack {
@@ -15,52 +17,35 @@ struct ContentView: View {
                 VStack{
                     Text("Welcome to")
                         .font(.largeTitle)
-                        .foregroundColor(Color(hex:"4477CE"))
+                        .foregroundColor(colorScheme.primary)
                         .padding(.bottom,5)
                     Text("RockysEars")
                         .font(.system(size:60))
                         .fontWeight(.bold)
-                        .foregroundColor(Color(hex:"4477CE"))
+                        .foregroundColor(colorScheme.primary)
                         .padding(.bottom,20)
                 }
                 Spacer()
                 Text("The app to interpret your pets demands!")
-                    .foregroundColor(Color(hex:"8CABFF"))
+                    .foregroundColor(colorScheme.secondary)
                     .padding()
                 Spacer()
                 NavigationLink(destination: MainPageView()) {
                     Text("Continue")
                         .font(.title2)
                         .padding()
-                        .background(Color(hex: "03C988"))
+                        .background(colorScheme.button)
                         .foregroundColor(.white)
                         .cornerRadius(10)
                 }
                 .padding(.bottom,20)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color(hex: "512B81"))
+            .background(colorScheme.background)
         }
     }
 }
 
-
-extension Color {
-    init(hex: String){
-        var hexString = hex
-        if hexString.hasPrefix("#") {
-            hexString.removeFirst()
-        }
-        let scanner = Scanner(string: hexString)
-        var rgbValue: UInt64 = 0
-        scanner.currentIndex = hexString.startIndex
-        scanner.scanHexInt64(&rgbValue)
-        let red = Double((rgbValue & 0xff0000) >> 16) / 255.0
-        let green = Double((rgbValue & 0x00ff00) >> 8) / 255.0
-        let blue = Double(rgbValue & 0x0000ff) / 255.0
-        self.init(red:red, green:green, blue:blue)
-    }
-}
 
 #Preview {
     ContentView()
